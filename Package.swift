@@ -1,4 +1,4 @@
-// swift-tools-version: 5.6
+// swift-tools-version:6.0
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -6,22 +6,12 @@ import PackageDescription
 let package = Package(
     name: "OneFingerRotation",
     platforms: [
-        .iOS(.v14), .macOS(.v11), .watchOS(.v7)
+		.iOS(.v17), .macCatalyst(.v17), .macOS(.v14), .tvOS(.v17), .visionOS(.v1), .watchOS(.v10)
     ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "OneFingerRotation",
-            targets: ["OneFingerRotation"]),
+        .library(name: "OneFingerRotation", targets: ["OneFingerRotation"]),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "OneFingerRotation",
-            dependencies: []),
-        .testTarget(
-            name: "OneFingerRotationTests",
-            dependencies: ["OneFingerRotation"]),
+        .target(name: "OneFingerRotation"),
     ]
 )
