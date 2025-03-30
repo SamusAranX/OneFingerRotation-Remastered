@@ -25,6 +25,7 @@ public struct ViewRotation: ViewModifier {
 	/// The initial angle that's applied to the modified view.
 	@Binding var rotationAngle: Angle
 
+	/// Controls whether touch-based rotation is enabled or not.
 	@Binding var touchRotationEnabled: Bool {
 		didSet {
 			// reset isDragging when touch rotation is disabled
@@ -38,7 +39,7 @@ public struct ViewRotation: ViewModifier {
 	/// Defines a minimum and maximum allowed rotation for the modified view. Only applies to touch-based rotation, inertia, and auto rotation, **not** externally set values.
 	@State private var knobRange: ClosedRange<Angle>?
 
-	/// Whether inertia is enabled or not.
+	/// Controls whether inertia is enabled or not.
 	@Binding var inertiaEnabled: Bool {
 		didSet {
 			// reset all inertia-related values when inertia is disabled
@@ -61,7 +62,7 @@ public struct ViewRotation: ViewModifier {
 	/// Used in inertia calculations.
 	@State private var lastAngleDiff: Angle = .zero
 
-	/// Whether auto rotation is enabled or not.
+	/// Controls whether auto rotation is enabled or not.
 	@Binding var autoRotationEnabled: Bool
 
 	/// The amount by which the modified view should rotate per second.
