@@ -1,6 +1,6 @@
 //
 //  DebugTools.swift
-//  OneFingerRotation
+//  OneFingerRotation-Remastered
 //
 //  Created by Emma Alyx Wunder on 28.03.25.
 //
@@ -32,8 +32,9 @@ struct DebugTitleView: View {
     var body: some View {
 		Text(self.title)
 			.font(.title)
-			.bold()
-			.fontWidth(.condensed)
+			.fontWeight(.bold)
+			.fontWidth(.compressed)
+			.multilineTextAlignment(.center)
 			.padding()
 			.background(.regularMaterial, in: RoundedRectangle(cornerRadius: 10))
     }
@@ -71,11 +72,11 @@ struct DebugAngleOverlayView: View {
 	@Binding var angle: Angle
 
 	var body: some View {
-		Text("\(self.angle.degrees.formatted(FloatingPointFormatStyle<Double>.number.precision(.fractionLength(2))))°")
+		Text("\(self.angle.degrees.formatted(floatFormatStyle))°")
 			.monospacedDigit()
 			.bold()
 			.padding()
-			.background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 10))
+			.background(.ultraThinMaterial, in: Capsule(style: .continuous))
 	}
 }
 

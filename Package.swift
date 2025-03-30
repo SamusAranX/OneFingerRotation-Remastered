@@ -4,14 +4,14 @@
 import PackageDescription
 
 let package = Package(
-    name: "OneFingerRotation",
+    name: "OneFingerRotation-Remastered",
     platforms: [
 		.iOS(.v17), .macCatalyst(.v17), .macOS(.v14), .tvOS(.v17), .visionOS(.v1), .watchOS(.v10)
     ],
     products: [
-        .library(name: "OneFingerRotation", targets: ["OneFingerRotation"]),
+        .library(name: "OneFingerRotation-Remastered", targets: ["OneFingerRotation-Remastered"]),
     ],
     targets: [
-        .target(name: "OneFingerRotation"),
+        .target(name: "OneFingerRotation-Remastered"),
     ]
 )

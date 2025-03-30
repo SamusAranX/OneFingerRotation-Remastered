@@ -1,6 +1,6 @@
 //
 //  Comparable+Clamped.swift
-//  OneFingerRotation
+//  OneFingerRotation-Remastered
 //
 //  Created by Emma Alyx Wunder on 16.03.25.
 //

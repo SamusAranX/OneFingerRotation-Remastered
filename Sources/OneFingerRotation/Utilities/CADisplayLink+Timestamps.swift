@@ -1,6 +1,6 @@
 //
 //  CADisplayLink+Timestamps.swift
-//  OneFingerRotation
+//  OneFingerRotation-Remastered
 //
 //  Created by Emma Alyx Wunder on 15.03.25.
 //
