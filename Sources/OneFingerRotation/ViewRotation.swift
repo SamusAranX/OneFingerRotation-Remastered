@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealModule
 
 public struct ViewRotation: ViewModifier {
 
@@ -177,18 +178,19 @@ public struct ViewRotation: ViewModifier {
 			if self.inertiaActive, let inertiaDirection = self.inertiaDirection {
 				// do inertia
 				let angle = Angle(degrees: Double(self.lastVelocity) / timestamp.fps * inertiaDirection.rawValue)
-				self.lastVelocity *= (1 - self.inertiaFriction).clamped(to: 0...1)
+				self.lastVelocity *= 1 - ((.exp(1 / timestamp.fps) - 1) * self.inertiaFriction)
+
 				if let knobRange = self.knobRange {
 					self.rotationAngle = (self.rotationAngle + angle).clamped(to: knobRange)
 				} else {
 					self.rotationAngle += angle
 				}
 
-				if self.lastVelocity < 0.1 {
-					print("inertia ended")
+				if self.lastVelocity <= minimumVelocity {
+					print("inertia ended (velocity smaller than \(minimumVelocity))")
 					self.resetInertia()
 				} else if let knobRange = self.knobRange, self.rotationAngle == knobRange.lowerBound || self.rotationAngle == knobRange.upperBound {
-					print("inertia ended (knob)")
+					print("inertia ended (knob limit reached)")
 					self.resetInertia()
 				}
 			} else if self.autoRotationEnabled {

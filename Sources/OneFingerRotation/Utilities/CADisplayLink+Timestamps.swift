@@ -9,10 +9,24 @@ import UIKit
 
 @MainActor
 extension CADisplayLink {
-	static func timestamps() -> AsyncStream<Timestamps> {
+	public struct Timestamp: Sendable {
+		public let timestamp: TimeInterval
+		public let targetTimestamp: TimeInterval
+		public let duration: TimeInterval
+		public let fps: Double
+
+		init(displayLink: CADisplayLink) {
+			self.timestamp = displayLink.timestamp
+			self.targetTimestamp = displayLink.targetTimestamp
+			self.duration = displayLink.duration
+			self.fps = 1.0 / (self.targetTimestamp - self.timestamp)
+		}
+	}
+
+	public static func timestamps() -> AsyncStream<Timestamp> {
 		AsyncStream { continuation in
 			let displayLink = DisplayLink { displayLink in
-				continuation.yield(.init(displayLink: displayLink))
+				continuation.yield(Timestamp(displayLink: displayLink))
 			}
 
 			continuation.onTermination = { _ in
@@ -22,35 +36,17 @@ extension CADisplayLink {
 	}
 }
 
-extension CADisplayLink {
-	struct Timestamps {
-		let timestamp: TimeInterval
-		let targetTimestamp: TimeInterval
-		let duration: TimeInterval
-
-		var fps: Double {
-			1.0 / self.duration
-		}
-
-		init(displayLink: CADisplayLink) {
-			self.timestamp = displayLink.timestamp
-			self.targetTimestamp = displayLink.targetTimestamp
-			self.duration = displayLink.duration
-		}
-	}
-}
-
 @MainActor
 private class DisplayLink: NSObject {
 	private var displayLink: CADisplayLink!
 	private let handler: (CADisplayLink) -> Void
 
-	init(mode: RunLoop.Mode = .default, handler: @escaping (CADisplayLink) -> Void) {
+	init(mode: RunLoop.Mode = .common, handler: @escaping (CADisplayLink) -> Void) {
 		self.handler = handler
 		super.init()
 
 		self.displayLink = CADisplayLink(target: self, selector: #selector(handle(displayLink:)))
-		self.displayLink.preferredFrameRateRange = .init(minimum: 30, maximum: 120, preferred: 120)
+		self.displayLink.preferredFrameRateRange = .default
 		self.displayLink.add(to: .main, forMode: mode)
 	}
 

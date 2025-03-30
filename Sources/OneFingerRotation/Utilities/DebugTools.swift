@@ -77,6 +77,7 @@ struct DebugAngleOverlayView: View {
 			.bold()
 			.padding()
 			.background(.ultraThinMaterial, in: Capsule(style: .continuous))
+			.allowsHitTesting(false)
 	}
 }
 

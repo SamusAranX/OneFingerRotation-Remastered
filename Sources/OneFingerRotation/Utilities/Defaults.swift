@@ -8,13 +8,10 @@
 import SwiftUI
 
 // Default values for things passed into constructors
-@usableFromInline let defaultFriction: Double = 0.025
-
+@usableFromInline let defaultFriction: Double = 2.0
 @usableFromInline let defaultAutoRotationSpeed: Angle = .degrees(20)
-
-@usableFromInline let defaultKnobMinAngle: Angle = .degrees(-90)
-@usableFromInline let defaultKnobMaxAngle: Angle = .degrees(90)
-@usableFromInline let defaultKnobRange = defaultKnobMinAngle...defaultKnobMaxAngle
+let defaultKnobRange = Angle(degrees: -90)...Angle(degrees: 90)
 
 // Shared constants
-@usableFromInline let rotationThreshold: Double = 12.0
+let rotationThreshold: Double = 12.0
+let minimumVelocity: Double = .pi
