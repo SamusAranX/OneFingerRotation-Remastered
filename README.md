@@ -24,7 +24,7 @@ someView
 		touchRotationEnabled: .constant(true),
 		knobRange: Angle(degrees: -90)...Angle(degrees: 90),
 		inertiaEnabled: .constant(true),
-		inertiaFriction: .constant(0.025),
+		inertiaFriction: .constant(1.5),
 		autoRotationEnabled: .constant(false),
 		autoRotationSpeed: .constant(.degrees(90))
 	)
@@ -51,12 +51,12 @@ someView
 
 Use this if you want the ✨ *fanciest* ✨ rotation. Set `inertiaEnabled` to `true` and optionally override `inertiaFriction` to control how quickly the view's rotation slows down after flicking it.
 
-**Note:** The default friction value is **0.025**.
+**Note:** The default friction value is **1.5**.
 
 ```swift
 @State var rotation: Angle = .zero
 @State var inertiaEnabled: Angle = .constant(true)
-@State var inertiaFriction: Double = 0.025
+@State var inertiaFriction: Double = 1.5
 
 someView
 	.viewRotation(
